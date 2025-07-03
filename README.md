@@ -268,4 +268,4 @@ For issues or questions:
 
 ---
 
-Built with ❤️ using AI and modern web technologies.
+Built with ❤️ by Souhardya Saha
