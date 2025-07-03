@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SpendWise - AI-Powered Personal Finance Tracker{% endblock %}</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="{{ url_for('upload_file') }}" class="logo">
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="SpendWise Logo" class="logo-icon">
+                    <span class="logo-text">Spend<span style="color: rgb(40, 194, 245);">Wise</span></span>
+                </a>
+            </div>
+            <div class="nav-right">
+            
+                
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-container">
+                {% for message in messages %}
+                    <div class="flash-message">
+                        {{ message }}
+                        <button class="flash-close" onclick="this.parentElement.style.display='none'">×</button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="SpendWise Logo" class="footer-logo-icon">
+                <span class="footer-logo-text">SpendWise</span>
+            </div>
+            <div class="footer-info">
+                <p>&copy; 2025 SpendWise. All rights reserved.</p>
+                <p>Built with AI for smarter financial decisions.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

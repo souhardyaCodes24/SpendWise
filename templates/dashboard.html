@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - SpendWise{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Your Financial Dashboard</h1>
+        <p>AI-powered insights from your transaction data</p>
+        <a href="{{ url_for('upload_file') }}" class="btn-secondary">Upload New CSV</a>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Summary Cards -->
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="card-icon">💰</div>
+                <div class="card-content">
+                    <h3>Total Spending</h3>
+                    <p class="card-value">${{ "%.2f"|format(spending_summary.total_spending|abs) }}</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="card-icon">📊</div>
+                <div class="card-content">
+                    <h3>Categories</h3>
+                    <p class="card-value">{{ spending_summary.category_totals|length }}</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="card-icon">🔍</div>
+                <div class="card-content">
+                    <h3>Transactions</h3>
+                    <p class="card-value">{{ transactions|length }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="chart-section">
+            <div class="chart-container">
+                <h2>Spending by Category</h2>
+                <div class="chart-wrapper">
+                    <canvas id="spendingChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Advice Section -->
+        <div class="advice-section">
+            <div class="advice-card">
+                <div class="advice-header">
+                    <div class="advice-icon">🤖</div>
+                    <h2>AI-Powered Recommendations</h2>
+                </div>
+                <div class="advice-content">
+                    <div class="advice-text">
+                        {{ advice|parse_markdown|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Categories -->
+        <div class="categories-section">
+            <h2>Top Spending Categories</h2>
+            <div class="categories-list">
+                {% for category, amount in spending_summary.category_totals.items() %}
+                <div class="category-item">
+                    <div class="category-info">
+                        <span class="category-name">{{ category }}</span>
+                        <span class="category-amount">${{ "%.2f"|format(amount) }}</span>
+                    </div>
+                    <div class="category-bar">
+                        <div class="category-fill" style="width: {{ (amount / spending_summary.category_totals.values()|list|max * 100)|round(1) }}%"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Transactions Table -->
+        <div class="transactions-section">
+            <h2>Recent Transactions</h2>
+            <div class="table-container">
+                <table class="transactions-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for transaction in transactions[-20:] %}
+                        <tr>
+                            <td>{{ transaction.Date }}</td>
+                            <td>{{ transaction.Description }}</td>
+                            <td class="amount">{{ transaction.Amount }}</td>
+                            <td>
+                                <span class="category-tag category-{{ transaction.Category.lower() }}">
+                                    {{ transaction.Category }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% if transactions|length > 20 %}
+            <div class="table-footer">
+                <p>Showing last 20 transactions out of {{ transactions|length }} total</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Pass chart data to JavaScript
+    const chartData = {{ chart_data|tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

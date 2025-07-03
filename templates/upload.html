@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Upload CSV - SpendWise{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Turn Your Spending Into Smart Saving</h1>
+        <p class="hero-subtitle">Create stunning financial insights by uploading your bank statement CSV</p>
+
+        <div class="upload-container">
+            <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data" class="upload-form">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7,10 12,15 17,10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                    </div>
+                    <div class="upload-text">
+                        <p class="upload-primary">Drop your CSV file here or click to browse</p>
+                        <p class="upload-secondary">CSV must have columns: Date, Description, Amount</p>
+                    </div>
+                    <input type="file" name="file" id="fileInput" accept=".csv" class="file-input" required>
+                </div>
+
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <div class="file-details">
+                        <span class="file-name" id="fileName"></span>
+                        <span class="file-size" id="fileSize"></span>
+                    </div>
+                    <button type="button" class="remove-file" id="removeFile">×</button>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn" disabled>
+                    <span class="btn-text">Analyze My Spending</span>
+                    <span class="btn-loader" style="display: none;">
+                        <svg width="20" height="20" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"
+                                stroke-dasharray="31.416" stroke-dashoffset="31.416">
+                                <animate attributeName="stroke-dasharray" dur="2s"
+                                    values="0 31.416;15.708 15.708;0 31.416" repeatCount="indefinite" />
+                                <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416"
+                                    repeatCount="indefinite" />
+                            </circle>
+                        </svg>
+                        Processing...
+                    </span>
+                </button>
+            </form>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🤖</div>
+                <h3>AI-Powered Categorization</h3>
+                <p>Automatically categorize transactions using advanced machine learning</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>Visual Analytics</h3>
+                <p>Beautiful charts and insights to understand your spending patterns</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💡</div>
+                <h3>Smart Recommendations</h3>
+                <p>Personalized advice powered by Google's Gemini AI</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🎯</div>
+                <h3>Spending Goals (Beta)</h3>
+                <p>Set custom targets and track your savings journey with helpful reminders</p>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="info-section">
+    <div class="info-content">
+        <h2>How it works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Upload Your CSV</h3>
+                    <p>Export your bank statement as CSV with Date, Description, and Amount columns</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>AI Analysis</h3>
+                    <p>Our AI automatically categorizes your transactions and analyzes spending patterns</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Get Insights</h3>
+                    <p>Receive personalized recommendations and visual analytics to optimize your finances</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+{% endblock %}
