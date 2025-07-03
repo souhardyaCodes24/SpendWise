@@ -11,10 +11,27 @@ A production-ready Flask application that analyzes bank statement CSVs using AI 
 - 📱 **Fully Responsive**: Optimized for desktop and mobile devices
 - ⚡ **Real-time Processing**: Fast CSV parsing and analysis
 
-## Screenshots
 
-*Upload Page*: Clean, intuitive drag-and-drop interface for CSV files
-*Dashboard*: Comprehensive financial insights with interactive charts and AI recommendations
+
+## 📸 Screenshots
+
+### 1. 🏠 Homepage (Before Upload)
+![Homepage Before Upload](screenshots/homepage_before_upload.png)
+
+---
+
+### 2. 📂 File Uploaded View
+![Homepage After Upload](screenshots/homepage_after_upload.png)
+
+---
+
+### 3. 📊 Dashboard with Results
+![Result Dashboard](screenshots/result_dashboard.png)
+
+---
+
+### 4. 📈 Insights & Recommendations
+![Financial Insights](screenshots/insights_page.png)
 
 ## Prerequisites
 
