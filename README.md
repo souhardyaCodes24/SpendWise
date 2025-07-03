@@ -16,22 +16,28 @@ A production-ready Flask application that analyzes bank statement CSVs using AI 
 ## 📸 Screenshots
 
 ### 1. 🏠 Homepage (Before Upload)
-![Homepage Before Upload](screenshots/homepage_before_upload.png)
+![Homepage Before Upload](screenshots/homepage.png)
 
+
+### 1.1 🏠 Homepage (Before Upload)
+![Homepage Before Upload](screenshots/homepage2.png)
 ---
 
 ### 2. 📂 File Uploaded View
-![Homepage After Upload](screenshots/homepage_after_upload.png)
+![Homepage After Upload](screenshots/processing.png)
 
 ---
 
 ### 3. 📊 Dashboard with Results
-![Result Dashboard](screenshots/result_dashboard.png)
+![Result Dashboard](screenshots/result1.png)
 
 ---
 
 ### 4. 📈 Insights & Recommendations
-![Financial Insights](screenshots/insights_page.png)
+![Financial Insights](screenshots/result2.png)
+
+### 4.1 📈 Insights & Recommendations
+![Financial Insights](screenshots/result3.png)
 
 ## Prerequisites
 
