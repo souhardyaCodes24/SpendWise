@@ -14,7 +14,7 @@ import re
 from models import TransactionCategorizer
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'AIzaSyBqln035JyrtPmrBVO_sa7hHErvBfEmsKE'
+app.config['SECRET_KEY'] = os.environ.get('GEMINI_API_KEY')
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
@@ -64,7 +64,7 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 categorizer = TransactionCategorizer()
 
 # Configure Gemini API
-genai.configure(api_key="AIzaSyBqln035JyrtPmrBVO_sa7hHErvBfEmsKE")
+genai.configure(api_key=os.environ.get('GEMINI_API_KEY'))
 
 def allowed_file(filename):
     """Check if uploaded file is a CSV file."""
